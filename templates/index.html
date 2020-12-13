@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel='icon' href='https://i.ibb.co/GWqM3mM/logo.jpg'>
+
+  <title>Indonesia Open Diagnosis System</title>
+
+  <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet">
+  <link href="{{ url_for('static', filename='vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/resume.min.css') }}" rel="stylesheet">
+</head>
+
+<body id="page-top">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
+    <a class="navbar-brand js-scroll-trigger" href="#page-top">
+      <span class="d-block d-lg-none">Neuratest</span>
+      <span class="d-none d-lg-block">
+        <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="{{ url_for('static', filename='img/logo.jpg') }}" alt="">
+      </span>
+    </a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav">
+        <li class="nav-item"> <a class="nav-link js-scroll-trigger" href="#about">About</a> </li>
+        <li class="nav-item"> <a class="nav-link js-scroll-trigger" href="#tech">Tech Stack</a> </li>
+        <li class="nav-item"> <a class="nav-link js-scroll-trigger" href="#access">Get Access</a> </li>
+        <li class="nav-item"> <a class="nav-link js-scroll-trigger" href="#contact">Contact</a> </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container-fluid p-0">
+    <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="about">
+      <div class="w-100">
+        <h1 class="mb-0">Neura<span class="text-primary">Test</span></h1>
+        <div class="subheading mb-5"><span class="text-primary">Deep Learning</span> for Healthcare</div>
+        <p class="lead mb-5" style="text-align: justify;">Open computer-aided diagnosis system prototyped by <a href="https://www.linkedin.com/in/rakhid16/" style="text-decoration: none;"><b>rakhid16</b></a> in order to improving Indonesia healthcare ecosystem.</p>
+      </div>
+    </section>
+
+    <hr class="m-0">
+    
+    <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="tech">
+      <div class="w-100">
+        <h2 class="mb-5">Technology stack behind Neuratest</h2>
+
+        <div class="subheading mb-3">Tools</div>
+        <ul class="list-inline dev-icons">
+          <li class="list-inline-item"> <i class="fab fa-bootstrap" title="Bootstrap"></i> </li>
+          <li class="list-inline-item"> <i class="fab fa-flask" title="Flask"></i> </li>
+          <li class="list-inline-item"> <i class="fab fa-torch" title="PyTorch"></i> </li>
+          <li class="list-inline-item"> <i class="fab fa-drive" title="Firebase"></i> </li>
+        </ul>
+
+        <div class="subheading mb-3">Features</div>
+        <ul class="fa-ul mb-0">
+          <li> <i class="fa-li fa fa-check"></i> Reliable</li>
+          <li> <i class="fa-li fa fa-check"></i> Free forever</li>
+          <li> <i class="fa-li fa fa-check"></i> User Friendly</li>
+          <li> <i class="fa-li fa fa-check"></i> Machine Learning as Service</li>
+        </ul>
+      </div>
+    </section>
+
+    <hr class="m-0">
+
+    <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="access">
+      <div class="w-100">
+        <h2 class="mb-5">Get access</h2>
+        <p>Please register your hospital to get the access. If you already have an account just login instead!</p>
+        <p class="mb-0"><a href="{{ url_for('login') }}" class="btn btn-primary">Login</a> - <a href="{{ url_for('register') }}" class="btn btn-success">Register</a></p>
+      </div>
+    </section>
+
+    <hr class="m-0">
+
+    <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="contact">
+      <div class="w-100">
+        <h2 class="mb-5">Contact</h2>
+        <p>Feel free to contact me on my social media for educational or business purposes. I'll reply your message as soon as possible.</p><br><br>
+        <div class="social-icons">
+          <a href="https://t.me/rakhid16" target="blank"> <i class="fab fa-telegram"></i> </a>
+          <a href="https://linkedin.com/in/rakhid16" target="blank"> <i class="fab fa-linkedin-in"></i> </a>          
+          <a href="https://fb.com/radical.rakhman" target="blank"> <i class="fab fa-facebook-f"></i> </a>
+          <a href="https://github.com/rakhid16" target="blank"> <i class="fab fa-github"></i> </a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script src="{{ url_for('static', filename='vendor/jquery/jquery.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/resume.min.js') }}"></script>
+</body>
+</html>
