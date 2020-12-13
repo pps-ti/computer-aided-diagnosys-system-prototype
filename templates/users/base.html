@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>{% block title %} {% endblock %}</title>
+
+  <link rel='icon' href='https://i.ibb.co/GWqM3mM/logo.jpg'>
+  <link href="{{ url_for('static', filename='vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/sb-admin-2.min.css') }}" rel="stylesheet">
+  {% block style %} {% endblock %}
+</head>
+
+<body id="page-top">
+  <div id="wrapper">
+    <ul class="navbar-nav bg-gradient-primary2 sidebar sidebar-dark accordion" id="accordionSidebar">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ url_for('dashboard_user', id = session['user']) }}">
+        <div class="sidebar-brand-icon">
+          <i class="fas fa-home"></i>
+        </div>
+        <div class="sidebar-brand-text mx-3">Neuratest</div>
+      </a>
+      
+      <hr class="sidebar-divider">
+      <div class="sidebar-heading">Data and Diagnosing</div>
+      
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{{ url_for('diagnose', id = session['user']) }}">
+          <i class="fas fa-fw fa-cog"></i>
+          <span>Diagnose</span></a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseTwo">
+          <i class="fas fa-fw fa-cog"></i>
+          <span>Diagnosed Data</span>
+        </a>
+
+        <div id="collapseThree" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Choose one:</h6>
+            <a class="collapse-item" href="{{ url_for('diagnosed', id = session['user'], disease = 'brain_tumor') }}">Brain Tumor</a>
+            <a class="collapse-item" href="{{ url_for('diagnosed', id = session['user'], disease = 'colon_tissue') }}">Colon</a>
+            <a class="collapse-item" href="{{ url_for('diagnosed', id = session['user'], disease = 'lung_tissue') }}">Lung</a>
+            <a class="collapse-item" href="{{ url_for('diagnosed', id = session['user'], disease = 'malaria') }}">Malaria</a>
+            <a class="collapse-item" href="{{ url_for('diagnosed', id = session['user'], disease = 'parkinson') }}">Parkinson</a>
+            <a class="collapse-item" href="{{ url_for('diagnosed', id = session['user'], disease = 'retina_oct') }}">Retina</a>
+          </div>
+        </div>
+      </li>
+
+      <hr class="sidebar-divider">
+
+      <li class="nav-item">
+        <a class="nav-link" href="#" data-toggle="modal" data-target="#about_Modal">
+          <i class="fas fa-fw fa-info"></i>
+          <span>About</span></a>
+      </li>
+
+      <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+      </div>
+    </ul>
+
+    <div id="content-wrapper" class="d-flex flex-column">
+      <div id="content">
+        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+          <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+            <i class="fa fa-bars"></i>
+          </button>
+
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown no-arrow">
+              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ id[1]['hospital_name'] }}</span>
+                <img class="img-profile rounded-circle" src="https://sdl-stickershop.line.naver.jp/products/0/0/1/1202259/android/stickers/8217723.png">
+              </a>
+
+              <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#help_Modal">
+                  <i class="fas fa-question fa-sm fa-fw mr-2 text-gray-400"></i>Help
+                </a>
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#profile_Modal">
+                  <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>Profile
+                </a>
+
+                <div class="dropdown-divider"></div>
+                
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                  <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Logout
+                </a>
+              </div>
+            </li>
+          </ul>
+        </nav>
+
+        <p align="center">{{ pesan }}</p>
+        
+        <div class="container-fluid">
+          {% block content %} {% endblock %}
+        </div>
+      </div>
+
+      <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <span>Copyright &copy; Neuratest 2020</span>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <!-- arrow button at right-bottom screen -->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <!-- About Modal -->
+  <div class="modal fade" id="about_Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">About</h5>
+        </div>
+        
+        <div class="modal-body">
+          <p align=center>
+            <img src="https://sdl-stickershop.line.naver.jp/products/0/0/1/1202259/android/stickers/8217739.png">
+          </p>
+          <p align=left>
+            Open computer-aided diagnosis system designed by <a href="https://github.com/Rakhid16/neuratest-ai" target="blank">rakhid16</a> in order to improving Indonesia healthcare ecosystem.
+            You can try our diagnosing feature using this datasets :<br><a href="https://www.kaggle.com/andrewmvd/lung-and-colon-cancer-histopathological-images" target="blank">Lung & Colon Cancer</a><br>
+            <a href="https://www.kaggle.com/iarunava/cell-images-for-detecting-malaria" target="blank">Malaria</a><br>
+            <a href="https://www.kaggle.com/paultimothymooney/kermany2018" target="blank">Retina OCT</a><br>
+            <a href="https://www.kaggle.com/navoneel/brain-mri-images-for-brain-tumor-detection" target="blank">Tumor Otak</a><br>
+            <a href="http://wwwp.fc.unesp.br/~papa/pub/datasets/Handpd/" target="blank">Parkinson</a>
+          </p>
+        </div>
+
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Help Modal -->
+  <div class="modal fade" id="help_Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Help</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        
+        <form method="POST" action="{{ url_for('user_complaint', id = id[0]) }}">
+          <div class="modal-body">What can we help?<br>
+            <textarea name="message" placeholder="Leave your message here..." style="width: 100%; height: 12.5em;"></textarea>
+          </div>
+
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+            <input type="submit" class="btn btn-primary" value="Send message">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Profile Modal -->
+  <div class="modal fade" id="profile_Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit your account</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        
+        <form method="POST" action="{{ url_for('user_edit_data', id = id[0]) }}" onsubmit="Cek_Sandi()" >
+          <div class="modal-body">
+            Email :<br>
+            <input type="email" style="width: 100%;" name="email" value="{{ id[1]['email'] }}" required><br><br>
+            Hospital Name :<br>
+            <input type="text" style="width: 100%;" name="hospital_name" value="{{ id[1]['hospital_name'] }}" required><br><br>
+            Hospital Address :<br>
+            <input type="text" style="width: 100%;" name="hospital_address" value="{{ id[1]['address'] }}" required><br><br>
+            Province :
+            <select name="province" id="province" style="width: 100%; border-radius:4px;border:1px solid #AAAAAA; background-color: white;">
+              <option value="{{ id[1]['province'] }}">{{ id[1]['province'] }} (Currently)</option>
+              <option value="Aceh">Aceh</option>
+              <option value="North Sumatera">North Sumatera</option>
+              <option value="West Sumatera">West Sumatera</option>
+              <option value="Riau">Riau</option>
+              <option value="Riau Archipelago">Riau Archipelago</option>
+              <option value="Jambi">Jambi</option>
+              <option value="Bengkulu">Bengkulu</option>
+              <option value="South Sumatera">South Sumatera</option>
+              <option value="Bangka Belitung Archipelago">Bangka Belitung Archipelago</option>
+              <option value="Lampung">Lampung</option>
+              <option value="Banten">Banten</option>
+              <option value="West Java">West Java</option>
+              <option value="DKI Jakarta">DKI Jakarta</option>
+              <option value="Central Java">Central Java</option>
+              <option value="DI Yogyakarta">DI Yogyakarta</option>
+              <option value="East Java">East Java</option>
+              <option value="Bali">Bali</option>
+              <option value="West Nusa Tenggara">West Nusa Tenggara</option>
+              <option value="East Nusa Tenggara">East Nusa Tenggara</option>
+              <option value="North Kalimantan">North Kalimantan</option>
+              <option value="West Kalimantan">West Kalimantan</option>
+              <option value="Central Kalimantan">Central Kalimantan</option>
+              <option value="South Kalimantan">South Kalimantan</option>
+              <option value="East Kalimantan">East Kalimantan</option>
+              <option value="Gorontalo">Gorontalo</option>
+              <option value="North Sulawesi">North Sulawesi</option>
+              <option value="West Sulawesi">West Sulawesi</option>
+              <option value="Central Sulawesi">Central Sulawesi</option>
+              <option value="South Sulawesi">South Sulawesi</option>
+              <option value="Southeast Sulawesi">Southeast Sulawesi</option>
+              <option value="North Maluku">North Maluku</option>
+              <option value="Maluku">Maluku</option>
+              <option value="West Papua">West Papua</option>
+              <option value="Papua">Papua</option>
+            </select><br><br>
+
+            Old Password :<br>
+            <input type="password" style="width: 100%;" name="old_pwd" id="Sandi_Admin" value="{{ id[1]['pwd'] }}" placeholder="Your old password here" readonly><br>
+            <input type="checkbox" onclick="Lihat_Sandi()"> See password<br><br>
+            New Password :<br>
+            <input type="password" style="width: 100%;" id="sandi_baru" name="new_pwd" placeholder="Enter new password here"><br><br>
+            Repeat New Password :<br>
+            <input type="password" style="width: 100%;" id="sandi_baru_2" name="new_pwd2" placeholder="Repeat the password here">
+          </div>
+
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+            <input type="submit" class="btn btn-primary" value="Save data">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Logout Modal-->
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        
+        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          <a class="btn btn-primary" href="{{ url_for('logout') }}">Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="{{ url_for('static', filename='vendor/jquery/jquery.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/sb-admin-2.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/sandi.js') }}"></script>
+  {% block script %}
+  {% endblock %}
+</body>
+</html>
