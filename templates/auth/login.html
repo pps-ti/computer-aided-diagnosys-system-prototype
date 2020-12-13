@@ -1,0 +1,21 @@
+{% extends 'auth/base.html' %}
+
+{% block title %}
+  <title>Login</title>
+{% endblock %}
+
+{% block content %}
+  <div class="text-center"> <h1 class="h4 text-gray-900 mb-4">Welcome!</h1> </div>
+                  
+  <form class="user" method="POST">
+    <div class="form-group"> <input name="email" type="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Your email address..."> </div>
+    <div class="form-group"> <input name="sandi" type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Your password"> </div>
+    <p align=center style="font-weight: bolder; color: red;">{{ pesan }}</p>
+    <input type="submit" value="Login" class="btn btn-primary btn-user btn-block">
+  </form>
+
+  <hr>
+                  
+  <div class="text-center"> <a class="small" href="{{ url_for('register') }}">Create new account</a> </div>
+  <div class="text-center"> <a class="small" href="{{ url_for('reset_pwd') }}">Forgot password?</a> </div>
+{% endblock %}
