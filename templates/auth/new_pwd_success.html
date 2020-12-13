@@ -1,0 +1,14 @@
+{% extends 'auth/base.html' %}
+
+{% block title %}
+  <title>Reset Password Complete!</title>
+{% endblock %}
+
+{% block content %}
+<div class="text-center">
+  <h1 class="h4 text-gray-900 mb-2">Your password has been updated!</h1>
+  <p class="mb-4">Now you can login with your new password</p>
+</div>
+<hr>
+<div class="text-center"> <a class="small" href="{{ url_for('login') }}">Login</a> </div>
+{% endblock %}

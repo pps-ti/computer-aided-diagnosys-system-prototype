@@ -1,0 +1,38 @@
+{% extends 'users/base.html' %}
+
+{% block title %} Patient Successfully Diagnosed!{% endblock %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-xl-12 col-lg-7">
+      <div class="card shadow mb-4">
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-primary">This diagnose result has been added to your database!</h6>
+        </div>
+        
+        <h5 style="margin-top: 10px;"></h5>
+        
+        <div style="justify-content: space-between">
+          <div style="float: left; position: relative;" class="col-xl-6">
+            Name : {{ result['name'] }} <br>
+            Email : {{ result['email'] }} <br>
+            Address : {{ result['address'] }} <br>
+            Birth date : {{ result['birth_date'] }} <br>
+            Gender : {{ result['gender'] }} <br>
+            Height : {{ result['height'] }} <br>
+            Weight : {{ result['weight'] }} <br>
+            Blood type : {{ result['blood_type'] }} <br>
+            Probability : {{ result['proba'] }} <br><br>
+          </div>
+          <div style="float: right; position: relative;" class="col-xl-6">
+              <p align="center">
+                <img src="{{ result['image'] }}" width="100%" height="100%">
+                Result : {{ result['result'] }}
+              </p>
+          </div>
+        </div>
+        <center><a href="{{ url_for('diagnose', id = id[0]) }}" class="text-primary" style="font-weight: bolder;" >Diagnose again</a></center><br>
+      </div>
+    </div>
+  </div>
+{% endblock %}

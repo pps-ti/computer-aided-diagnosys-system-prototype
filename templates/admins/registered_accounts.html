@@ -1,0 +1,154 @@
+{% extends 'admins/base.html' %}
+
+{% block title %} Registered Accounts {% endblock %}
+
+{% block style %}
+<link href="{{ url_for('static', filename='vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+  <div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <h6 class="m-0 font-weight-bold text-primary">Registered Accounts</h6>
+    </div>
+    
+    <div class="card-body">
+      <div class="table-responsive">
+        
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+          <thead>
+            <tr>
+              <th>Hospital Name</th>
+              <th>Email</th>
+              <th>Address</th>
+              <th>Province</th>
+              <th>Option</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for user_id, element in data.items() %}
+              <tr>
+                <td>{{ element['hospital_name'] }}</td>
+                <td>{{ element['email'] }}</td>
+                <td>{{ element['address'] }}</td>
+                <td>{{ element['province'] }}</td>
+                <td style="text-align: center;">
+                  <a href="#" data-toggle="modal" data-target="#see_data{{ user_id }}">
+                    <i class="fas fa-user-edit" title="See details"></i>
+                  </a> |
+                  <a href="#" data-toggle="modal" data-target="#delete_data{{ user_id }}">
+                    <i class="fas fa-user-slash" title="Delete data"></i>
+                  </a>
+                </td>
+              </tr>
+
+              <div class="modal fade" id="see_data{{ user_id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Patient Details</h5>
+                      <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                      </button>
+                    </div>
+                    <form method="POST" action="{{ url_for('edit_user', id = id[0], id_user = user_id) }}" onsubmit="Cek_Sandi()">
+                      <div class="modal-body">
+                        Name :<br>
+                        <input name="hospital_name" type="text" value="{{ element['hospital_name'] }}" style="width:100%" required><br><br>
+                        Email :<br>
+                        <input name="email" type="email" value="{{ element['email'] }}" style="width:100%" required><br><br>
+                        Address :<br>
+                        <input name="address" type="text" value="{{ element['address'] }}" style="width:100%" required><br><br>
+                        Password :<br>
+                        <input name="pwd" type="password" value="{{ element['pwd'] }}" style="width:100%" onmousedown="this.type='text'" onmouseup="this.type='password'" title="Click to see it" required><br><br>
+                        Province :<br>
+                        <select name="province" id="province" style="width: 100%; border-radius:4px;border:1px solid #AAAAAA; background-color: white;">
+                          <option value="{{ element['province'] }}">{{ element['province'] }} (Currently)</option>
+                          <option value="Aceh">Aceh</option>
+                          <option value="North Sumatera">North Sumatera</option>
+                          <option value="West Sumatera">West Sumatera</option>
+                          <option value="Riau">Riau</option>
+                          <option value="Riau Archipelago">Riau Archipelago</option>
+                          <option value="Jambi">Jambi</option>
+                          <option value="Bengkulu">Bengkulu</option>
+                          <option value="South Sumatera">South Sumatera</option>
+                          <option value="Bangka Belitung Archipelago">Bangka Belitung Archipelago</option>
+                          <option value="Lampung">Lampung</option>
+                          <option value="Banten">Banten</option>
+                          <option value="West Java">West Java</option>
+                          <option value="DKI Jakarta">DKI Jakarta</option>
+                          <option value="Central Java">Central Java</option>
+                          <option value="DI Yogyakarta">DI Yogyakarta</option>
+                          <option value="East Java">East Java</option>
+                          <option value="Bali">Bali</option>
+                          <option value="West Nusa Tenggara">West Nusa Tenggara</option>
+                          <option value="East Nusa Tenggara">East Nusa Tenggara</option>
+                          <option value="North Kalimantan">North Kalimantan</option>
+                          <option value="West Kalimantan">West Kalimantan</option>
+                          <option value="Central Kalimantan">Central Kalimantan</option>
+                          <option value="South Kalimantan">South Kalimantan</option>
+                          <option value="East Kalimantan">East Kalimantan</option>
+                          <option value="Gorontalo">Gorontalo</option>
+                          <option value="North Sulawesi">North Sulawesi</option>
+                          <option value="West Sulawesi">West Sulawesi</option>
+                          <option value="Central Sulawesi">Central Sulawesi</option>
+                          <option value="South Sulawesi">South Sulawesi</option>
+                          <option value="Southeast Sulawesi">Southeast Sulawesi</option>
+                          <option value="North Maluku">North Maluku</option>
+                          <option value="Maluku">Maluku</option>
+                          <option value="West Papua">West Papua</option>
+                          <option value="Papua">Papua</option>
+                        </select><br><br>
+                      </div>
+                      
+                      <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                        <input type="submit" class="btn btn-primary" value="Save">
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="modal fade" id="delete_data{{ user_id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Are you sure to delete this hospital account?</h5>
+                      <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                      </button>
+                    </div>
+                    
+                    <div class="modal-body">
+                      <b class="text-primary">Hospital Name :</b><br>
+                      {{ element['hospital_name'] }}<br>
+                      <b class="text-primary">Email :</b><br>
+                      {{ element['email'] }}<br>
+                      <b class="text-primary">Hospital Address :</b><br>
+                      {{ element['address'] }}<br>
+                      <b class="text-primary">Province :</b><br>
+                      {{ element['province'] }}<br>
+                    </div>
+                    
+                    <div class="modal-footer">
+                      <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                      <a class="btn btn-primary" href="{{ url_for('delete_user', id = id[0], id_user = user_id) }}">Delete</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block script %}
+  <script src="{{ url_for('static', filename='vendor/datatables/jquery.dataTables.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/demo/datatables-demo.js') }}"></script>
+{% endblock %}

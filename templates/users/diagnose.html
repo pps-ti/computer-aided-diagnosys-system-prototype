@@ -1,0 +1,82 @@
+{% extends 'users/base.html' %}
+
+{% block title %} Diagnose The Patient - {{ id[1]['hospital_name'] }}{% endblock %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-xl-12 col-lg-7">
+      <div class="card shadow mb-4">
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-primary">Enter the patient data</h6>
+        </div>
+        
+        <h5 style="margin-top: 10px;"></h5>
+        <form method="POST" enctype="multipart/form-data" style="margin-left: 7.5px;">
+          <div style="float: left; position: relative;" class="col-xl-6">
+            Email :<br>
+            <input name="email" style="width:100%" type="email" placeholder="Patient's email" required><br><br>
+            Name :<br>
+            <input name="name" style="width:100%" type="text" placeholder="Patient's name" required><br><br>
+            Address :<br>
+            <input name="address" style="width:100%" type="text" placeholder="Patient's address" required><br><br>
+            Birth Date :<br>
+            <input name="birth_date" style="width:100%" type="date" required><br><br>
+            Gender :<br>
+            <select name="gender" style="width: 100%; border-radius:4px;border:1px solid #AAAAAA; background-color: white;">
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+            </select><br><br>
+          </div>
+          <div style="float: right; position: relative;" class="col-xl-6">
+            Blood Type :<br>
+            <select name="blood_type" style="width: 100%; border-radius:4px;border:1px solid #AAAAAA; background-color: white;">
+              <option value="-">-</option>
+              <option value="A">A</option>
+              <option value="AB">AB</option>
+              <option value="B">B</option>
+              <option value="O">O</option>
+            </select><br><br>
+            Height :<br>
+            <input name="height" style="width:100%" type="number" placeholder="Patient's height in Cm" required><br><br>
+            Weight :<br>
+            <input name="weight" style="width:100%" type="number" placeholder="Patient's weight in Kg" required><br><br>
+            Disease :<br>
+            <select name="disease" style="width: 100%; border-radius:4px;border:1px solid #AAAAAA; background-color: white;">
+              <option value="brain_tumor">Brain Tumor</option>
+              <option value="colon_tissue">Colon Tissue</option>
+              <option value="lung_tissue">Lung Tissue</option>
+              <option value="malaria">Malaria</option>
+              <option value="parkinson">Parkinson</option>
+              <option value="retina_oct">Retina (OCT)</option>
+            </select><br><br>
+            Select Image :<br>
+            <input name="image" type="file" id="files" required>
+          </div>
+          
+          <center>
+            <output id="list"></output><br>
+            <input type="submit" value="Diagnose!" style="margin: 20px 0 20px 0">
+          </center>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    document.getElementById('files').addEventListener('change', handleFileSelect, false);
+
+    function handleFileSelect(evt) {
+    var files = evt.target.files;
+    var f = files[0];
+    var reader = new FileReader();
+    
+      reader.onload = (function(theFile) {
+            return function(e) {
+              document.getElementById('list').innerHTML = ['<br><img src="', e.target.result,'" title="', theFile.name, '" width="80%" />'].join('');
+            };
+      })(f);     
+      reader.readAsDataURL(f);
+    }
+  </script>
+{% endblock %}
+

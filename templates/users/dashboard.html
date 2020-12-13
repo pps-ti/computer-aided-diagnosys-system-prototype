@@ -1,0 +1,27 @@
+{% extends 'users/base.html' %}
+
+{% block title %} Neuratest - {{ id[1]['hospital_name'] }} {% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-xl-12 col-lg-7">
+    <div class="card shadow mb-4">
+      
+      <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+        <h6 class="m-0 font-weight-bold text-primary">Dashboard</h6>
+      </div>
+      
+      <div class="card-body">
+        <center><img style=" width: 50%; height: auto;" src="{{url_for('static', filename='img/doctor.svg') }}" ></center>
+      </div>
+    </div>
+  </div>
+
+</div>
+{% endblock %}
+
+{% block script %}
+  <script src="{{ url_for('static', filename='vendor/chart.js/Chart.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/demo/chart-area-demo.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/demo/chart-pie-demo.js') }}"></script>
+{% endblock %}

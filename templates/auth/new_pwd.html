@@ -1,0 +1,32 @@
+{% extends 'auth/base.html' %}
+
+{% block title %}
+  <title>Reset Password</title>
+{% endblock %}
+
+{% block content %}
+  <div class="text-center">
+    <h1 class="h4 text-gray-900 mb-2">Set your new password</h1>
+    <p class="mb-4">Input the unique code that we've sent to your email in the form below :</p>
+    <p style="color:red; font-weight:bolder">{{ msg }}</p>
+  </div>
+
+  <form method="POST" onsubmit="Cek_Sandi()">
+    <div class="form-group">
+      <input type="email" name="email" class="form-control form-control-user" aria-describedby="emailHelp" placeholder="Enter email address..."><br>
+      <input type="text" name="unique_code" class="form-control form-control-user" aria-describedby="emailHelp" placeholder="Enter unique code"><br>
+      <input type="password" name="pwd1" class="form-control form-control-user" id="sandi_baru" aria-describedby="emailHelp" placeholder="Enter new password"><br>
+      <input type="password" name="pwd2" class="form-control form-control-user" id="sandi_baru_2" aria-describedby="emailHelp" placeholder="Repeat new password">
+    </div>
+    <input type="submit" class="btn btn-primary btn-user btn-block" value="Set new password">
+  </form>
+  
+  <hr>
+  
+  <div class="text-center"> <a class="small" href="{{ url_for('register') }}">Create new account</a> </div>
+  <div class="text-center"> <a class="small" href="{{ url_for('login') }}">Remeber your login account?</a> </div>
+{% endblock %}
+
+{% block script %}
+  <script src="{{ url_for('static', filename='js/sandi.js') }}"></script>
+{% endblock %}

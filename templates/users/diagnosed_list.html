@@ -1,0 +1,131 @@
+{% extends 'users/base.html' %}
+
+{% block title %} Diagnosed Patients - {{ id[1]['hospital_name'] }} {% endblock %}
+
+{% block style %}
+<link href="{{ url_for('static', filename='vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+  <div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <h6 class="m-0 font-weight-bold text-primary">{{ disease.capitalize().replace('_', ' ') }}</h6>
+    </div>
+    
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Address</th>
+              <th>Birth Date</th>
+              <th>Gender</th>
+              <th>Result</th>
+              <th>Option</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>{% for patient_id, patient in data.items() %}
+              <td>{{ patient['name'] }}</td>
+              <td>{{ patient['email'] }}</td>
+              <td>{{ patient['address'] }}</td>
+              <td>{{ patient['birth_date'] }}</td>
+              <td>{{ patient['gender'] }}</td>
+              <td>{{ patient['result'] }}</td>
+              <td style="text-align: center;">
+                <a href="#" data-toggle="modal" data-target="#see_data{{ patient_id }}">
+                  <i class="fas fa-user-edit" title="See details"></i>
+                </a> |
+                <a href="#" data-toggle="modal" data-target="#delete_data{{ patient_id }}">
+                  <i class="fas fa-user-slash" title="Delete data"></i>
+                </a>
+              </td>
+            </tr>
+            <div class="modal fade" id="see_data{{ patient_id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Patient Details</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">×</span>
+                    </button>
+                  </div>
+                  <form method="POST" action="{{ url_for('edit_patient', id = id[0], disease = disease, id_patient = patient_id) }}">
+                    <div class="modal-body">
+                      Name :<br>
+                      <input name="name" type="text" value="{{ patient['name'] }}" style="width:100%" required><br><br>
+                      Email :<br>
+                      <input name="email" type="text" value="{{ patient['email'] }}" style="width:100%" required><br><br>
+                      Address :<br>
+                      <input name="address" type="text" value="{{ patient['address'] }}" style="width:100%" required><br><br>
+                      Birh date :<br>
+                      <input name="birth_date" type="date" value="{{ patient['birth_date'] }}" style="width:100%" required><br><br>
+                      Blood Type :<br>
+                      <input name="blood_type" type="text" value="{{ patient['blood_type'] }}" style="width:100%" required><br><br>
+                      Height (cm) :<br>
+                      <input name="height" type="number" value="{{ patient['height'] }}" style="width:100%" required><br><br>
+                      Weight (Kg) :<br>
+                      <input name="weight" type="text" value="{{ patient['weight'] }}" style="width:100%" required><br><br>
+                      Gender :<br>
+                      <input name="gender" type="text" value="{{ patient['gender'] }}" style="width:100%" required><br><br>
+                      Result :<br>
+                      <input name="result" type="text" value="{{ patient['result'] }}" style="width:100%" readonly required><br><br>
+                      Image :<br>
+                      <center><img src="{{ patient['image'] }}" width="80%" height="80%"></center>
+                    </div>
+                    
+                    <div class="modal-footer">
+                      <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                      <input type="submit" class="btn btn-primary" value="Save">
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          
+            <div class="modal fade" id="delete_data{{ patient_id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Are you sure to delete this patient data?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">×</span>
+                    </button>
+                  </div>
+                  
+                  <div class="modal-body">
+                    Name : {{ patient['name'] }}<br>
+                    Email : {{ patient['email'] }}<br>
+                    Address : {{ patient['address'] }}<br>
+                    Birh date : {{ patient['birth_date'] }}<br>
+                    Blood Type : {{ patient['blood_type'] }}<br>
+                    Height (cm) : {{ patient['height'] }}<br>
+                    Weight (Kg) : {{ patient['weight'] }}<br>
+                    Gender : {{ patient['gender'] }}<br>
+                    Result : {{ patient['result'] }}<br>
+                    Image : <br></center><img src="{{ patient['image'] }}" width="80%" height="80%"></center>
+                  </div>
+                  
+                  <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="{{ url_for('delete_patient', id = id[0], disease = disease, id_patient = patient_id) }}">Delete</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block script %}
+  <script src="{{ url_for('static', filename='vendor/datatables/jquery.dataTables.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/demo/datatables-demo.js') }}"></script>
+{% endblock %}
