@@ -1,0 +1,79 @@
+{% extends 'admins/base.html' %}
+
+{% block title %} Add New Hospital Account {% endblock %}
+
+{% block content %}
+{{ pesan }}
+  <div class="row">
+    <div class="col-xl-12 col-lg-7">
+      <div class="card shadow mb-4">
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-primary">Add New Hospital Account</h6>
+        </div>
+        <h5 style="margin-top: 10px;"></h5>
+        <form method="POST" style="margin-left: 7.5px;">
+          <div style="float: left; position: relative;" class="col-xl-6">
+            Email :<br>
+            <input name="email" style="width: 100%" type="email" placeholder="Enter user email" required ><br><br>
+            Password :<br>
+            <input name="pwd0" style="width: 100%" id="sandi_baru" type="password" placeholder="Enter user password" required ><br><br>
+            Repeat Password :<br>
+            <input name="pwd" style="width: 100%" id="sandi_baru_2" type="password" placeholder="Repeat the password" required ><br><br>
+            Hospital Name :<br>
+            <input name="hospital_name" style="width: 100%" type="text" placeholder="Enter the Hospital's name" required ><br><br>
+          </div>
+          
+          <div style="float: right; position: relative;" class="col-xl-6">
+            Hospital Address :<br>
+            <input name="hospital_address" style="width: 100%" type="text" placeholder="Enter the Hospital's address" required ><br><br>
+          
+          Province :<br>
+          <select name="province" id="province" style="width: 100%; border-radius:4px;border:1px solid #AAAAAA; background-color: white;">
+            <option value="Aceh">Aceh</option>
+            <option value="North Sumatera">North Sumatera</option>
+            <option value="West Sumatera">West Sumatera</option>
+            <option value="Riau">Riau</option>
+            <option value="Riau Archipelago">Riau Archipelago</option>
+            <option value="Jambi">Jambi</option>
+            <option value="Bengkulu">Bengkulu</option>
+            <option value="South Sumatera">South Sumatera</option>
+            <option value="Bangka Belitung Archipelago">Bangka Belitung Archipelago</option>
+            <option value="Lampung">Lampung</option>
+            <option value="Banten">Banten</option>
+            <option value="West Java">West Java</option>
+            <option value="DKI Jakarta">DKI Jakarta</option>
+            <option value="Central Java">Central Java</option>
+            <option value="DI Yogyakarta">DI Yogyakarta</option>
+            <option value="East Java">East Java</option>
+            <option value="Bali">Bali</option>
+            <option value="West Nusa Tenggara">West Nusa Tenggara</option>
+            <option value="East Nusa Tenggara">East Nusa Tenggara</option>
+            <option value="North Kalimantan">North Kalimantan</option>
+            <option value="West Kalimantan">West Kalimantan</option>
+            <option value="Central Kalimantan">Central Kalimantan</option>
+            <option value="South Kalimantan">South Kalimantan</option>
+            <option value="East Kalimantan">East Kalimantan</option>
+            <option value="Gorontalo">Gorontalo</option>
+            <option value="North Sulawesi">North Sulawesi</option>
+            <option value="West Sulawesi">West Sulawesi</option>
+            <option value="Central Sulawesi">Central Sulawesi</option>
+            <option value="South Sulawesi">South Sulawesi</option>
+            <option value="Southeast Sulawesi">Southeast Sulawesi</option>
+            <option value="North Maluku">North Maluku</option>
+            <option value="Maluku">Maluku</option>
+            <option value="West Papua">West Papua</option>
+            <option value="Papua">Papua</option>
+          </select><br><br>
+
+          Activation Status :<br>
+          <select name="activate_status" style="width: 100%; border-radius:4px;border:1px solid #AAAAAA; background-color: white;">
+            <option value="Yes">Yes (Auto)</option>
+            <option value="No">No (Manual by user)</option>
+          </select><br><br>
+          </div>
+          <center><input type="submit" style="margin: 7.5px 0 15px 0;" value="Send to database!"></center>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}
