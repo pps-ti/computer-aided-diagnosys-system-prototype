@@ -1,0 +1,7 @@
+pyrebase4==4.4.0
+flask==1.1.2
+flask_mail==0.9.0
+joblib==0.14.1
+numpy==1.18.3
+torch==1.5.0
+pillow==7.0.0
