@@ -1,0 +1,71 @@
+{% extends 'auth/base.html' %}
+
+{% block title %}
+  <title>Register</title>
+{% endblock %}
+
+{% block content %}
+  <div class="text-center"> <h1 class="h4 text-gray-900 mb-4">Create new account</h1> </div>
+
+  <form class="user" onsubmit="Cek_Sandi()" method="POST">
+    <div class="form-group"> <input name="email" type="email" class="form-control form-control-user" id="exampleInputEmail" placeholder="Email Address" required> </div>
+    
+    <div class="form-group row">
+      <div class="col-sm-6 mb-3 mb-sm-0"> <input name="pwd" type="password" class="form-control form-control-user" id="sandi_baru" placeholder="Password" required> </div>
+      <div class="col-sm-6"> <input name="pwd" type="password" class="form-control form-control-user" id="sandi_baru_2" placeholder="Repeat Password" required> </div>
+    </div>
+    
+    <div class="form-group"> <input name="hospital_name" type="text" class="form-control form-control-user" placeholder="Hospital Name" required> </div>
+    <div class="form-group"> <input name="hospital_address" type="text" class="form-control form-control-user" placeholder="Hospital Address" required> </div>
+    
+    <div class="form-group">
+      <label for="province">Province :</label>
+      <select name="province" id="province" style="width: 85%; border-radius:4px;border:1px solid #AAAAAA; background-color: white;">
+        <option value="Aceh">Aceh</option>
+        <option value="North Sumatera">North Sumatera</option>
+        <option value="West Sumatera">West Sumatera</option>
+        <option value="Riau">Riau</option>
+        <option value="Riau Archipelago">Riau Archipelago</option>
+        <option value="Jambi">Jambi</option>
+        <option value="Bengkulu">Bengkulu</option>
+        <option value="South Sumatera">South Sumatera</option>
+        <option value="Bangka Belitung Archipelago">Bangka Belitung Archipelago</option>
+        <option value="Lampung">Lampung</option>
+        <option value="Banten">Banten</option>
+        <option value="West Java">West Java</option>
+        <option value="DKI Jakarta">DKI Jakarta</option>
+        <option value="Central Java">Central Java</option>
+        <option value="DI Yogyakarta">DI Yogyakarta</option>
+        <option value="East Java">East Java</option>
+        <option value="Bali">Bali</option>
+        <option value="West Nusa Tenggara">West Nusa Tenggara</option>
+        <option value="East Nusa Tenggara">East Nusa Tenggara</option>
+        <option value="North Kalimantan">North Kalimantan</option>
+        <option value="West Kalimantan">West Kalimantan</option>
+        <option value="Central Kalimantan">Central Kalimantan</option>
+        <option value="South Kalimantan">South Kalimantan</option>
+        <option value="East Kalimantan">East Kalimantan</option>
+        <option value="Gorontalo">Gorontalo</option>
+        <option value="North Sulawesi">North Sulawesi</option>
+        <option value="West Sulawesi">West Sulawesi</option>
+        <option value="Central Sulawesi">Central Sulawesi</option>
+        <option value="South Sulawesi">South Sulawesi</option>
+        <option value="Southeast Sulawesi">Southeast Sulawesi</option>
+        <option value="North Maluku">North Maluku</option>
+        <option value="Maluku">Maluku</option>
+        <option value="West Papua">West Papua</option>
+        <option value="Papua">Papua</option>
+      </select> 
+    </div>
+    
+    <input type="submit" class="btn btn-primary btn-user btn-block" value="Register Account">
+    <br><p align=center style="font-weight: bolder; color: red;">{{ pesan }}</p>
+  
+  </form>
+  <hr>
+  <div class="text-center"> <a class="small" href="{{ url_for('login') }}">Already have an account?</a> </div>          
+{% endblock %}
+
+{% block script %}
+  <script src="{{ url_for('static', filename='js/sandi.js') }}"></script>
+{% endblock %}
