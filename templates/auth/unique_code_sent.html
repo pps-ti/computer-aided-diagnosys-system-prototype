@@ -1,0 +1,16 @@
+{% extends 'auth/base.html' %}
+
+{% block title %}
+  <title>Unique code sent!</title>
+{% endblock %}
+
+{% block content %}
+  <div class="text-center">
+    <h1 class="h4 text-gray-900 mb-2">Unique code has been sent!</h1>
+    <p class="mb-4">Please check your email inbox then use the unique code that we provided to complete this process.</p>
+  </div>
+  
+  <hr>
+
+  <div class="text-center"> <a class="small" href="{{ url_for('new_pwd') }}">Complete the process</a> </div>
+{% endblock %}
