@@ -93,5 +93,5 @@ Silahkan <i>fork</i> repositori ini terlebih dahulu setelah itu kalian bebas men
 - [x] Menghapus data pasien
 - [x] Keluar <i>dashboard</i>
 
-## :movie: Dokumentasi
+## :snake: Dokumentasi
 <a href="https://www.youtube.com/watch?v=106l8evECYg&t=260s"><i>Python Conference Asia Pacific 2020</i></a>
