@@ -1,7 +1,7 @@
 # WEB FRAMEWORKS
 from flask import Flask, render_template, redirect, request, url_for, session
 
-# REFACTORED CODE
+# REFACTORED CODES
 from src.db_storage.read import check_session, get_id_account, get_patients_data, data_users, user_dashboard, user_login
 from src.db_storage.create import add_hospital_account, admin_add_new_user
 from src.db_storage.delete import delete_session, delete_patient_data, delete_hospital_account
